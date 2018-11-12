@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuanju.demo.mapper.UserMapper">
+
+    <select id="findUserById" resultType="com.yuanju.demo.vo.UserVO">
+       select name,age
+       from user
+       where userId=#{userId}
+    </select>
+
+    <insert id="userSignUp">
+        INSERT INTO USER ( name, age, phone, address,pwd )
+        VALUES
+            ( #{name},#{age},#{phone},#{address},#{pwd})
+    </insert>
+
+    
+    <select id="findAllUser" parameterType="com.yuanju.demo.bo.PageBO" resultType="com.yuanju.demo.vo.PageUserVO">
+        select name,age,phone,address,pwd
+        from user
+        order by userid
+        limit #{startPage},#{rowNum}
+    </select>
+
+    <select id="AllUserCount" resultType="Integer">
+       select count(userId)
+       from user
+    </select>
+</mapper>
